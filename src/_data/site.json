@@ -4,14 +4,29 @@
   "lema": "In a fantastic place called Portugal",
   "descricao": "A Sud Living compra, recupera e vende casas com história no Algarve, com um twist de irreverência, identidade e sentido estético.",
   "telefone": "+351 966 055 176",
-  "email": "geral@sudliving.com",
+  "email": "geral@sudliving.pt",
   "regiao": "Algarve, Portugal",
   "hero": [
-    { "src": "/images/santa-rita-patio.jpg", "alt": "Pátio da Casa de Santa Rita, com tanque e oliveira" },
-    { "src": "/images/santa-rita-mesa.jpg", "alt": "Cozinha e mesa de jantar da Casa de Santa Rita" },
-    { "src": "/images/santa-rita-duche.jpg", "alt": "Duche exterior entre paredes caiadas" },
-    { "src": "/images/santa-rita-sala.jpg", "alt": "Sala com sofá de linho e estante em nicho" },
-    { "src": "/images/santa-rita-tanque.jpg", "alt": "Tanque de água junto a parede caiada" }
+    {
+      "src": "/images/santa-rita-patio.jpg",
+      "alt": "Pátio da Casa de Santa Rita, com tanque e oliveira"
+    },
+    {
+      "src": "/images/santa-rita-mesa.jpg",
+      "alt": "Cozinha e mesa de jantar da Casa de Santa Rita"
+    },
+    {
+      "src": "/images/santa-rita-duche.jpg",
+      "alt": "Duche exterior entre paredes caiadas"
+    },
+    {
+      "src": "/images/santa-rita-sala.jpg",
+      "alt": "Sala com sofá de linho e estante em nicho"
+    },
+    {
+      "src": "/images/santa-rita-tanque.jpg",
+      "alt": "Tanque de água junto a parede caiada"
+    }
   ],
   "intro_titulo": "As nossas casas são movidas pela nossa inspiração, pelo nosso sentido estético e por um profundo respeito pelo Algarve antigo.",
   "intro_texto": "A **Sud Living** dedica-se à compra e venda de imóveis, sempre com um twist de irreverência, identidade e sentido estético, inspirado numa forma muito própria de viver a Sul.\n\nGostamos de casas com história, de lugares com carácter e da genuinidade da arquitetura algarvia. É essa essência que procuramos preservar e reinterpretar em cada um dos nossos projetos.\n\nAtravés das [Casas da Areia](https://casasdaareia.com), estendemos esta visão ao alojamento, criando experiências cuidadas e personalizadas, pensadas para viver e descobrir o Algarve de forma autêntica.\n\nSomos uma equipa jovem, dedicada e apaixonada pelo que fazemos, pela beleza simples das casas algarvias e por esse modo de vida tão particular que só o Sul sabe oferecer.",
@@ -23,20 +38,9 @@
   "popup_titulo": "Quer investir com a Sud Living?",
   "popup_texto": "Recuperamos casas com história no Algarve. Fale connosco e conheça os próximos projetos.",
   "popup_imagem": "/images/santa-rita-corredor.jpg",
-  "redes": {
-    "facebook": "",
-    "instagram": "",
-    "linkedin": "",
-    "pinterest": ""
-  },
   "legal": {
     "denominacao": "[Denominação social]",
     "nipc": "[000 000 000]",
-    "morada": "[Morada completa]",
-    "codigo_postal": "",
-    "localidade": "",
-    "capital_social": "",
-    "conservatoria": "",
-    "ami": ""
+    "morada": "[Morada completa]"
   }
 }
