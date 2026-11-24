@@ -1,0 +1,11 @@
+{
+  "titulo": "Our Team",
+  "texto": "As pessoas por trás de cada casa, da escolha do imóvel ao último detalhe.",
+  "membros": [
+    { "nome": "Cátia", "funcao": "Founder", "foto": "" },
+    { "nome": "Iuri", "funcao": "Founder", "foto": "" },
+    { "nome": "Nuno Martins", "funcao": "Fotografia e vídeo", "foto": "" },
+    { "nome": "Housekeeping", "funcao": "Equipa Casas da Areia", "foto": "" },
+    { "nome": "Filipe Sena", "funcao": "Manutenção", "foto": "" }
+  ]
+}

@@ -1,0 +1,9 @@
+---
+layout: base.njk
+bodyClass: legal-page
+---
+<main id="main" class="wrap legal-body">
+  <h1>{{ title }}</h1>
+  {%- if atualizado %}<p class="legal-updated">Última atualização: {{ atualizado }}</p>{% endif %}
+  {{ content | safe }}
+</main>

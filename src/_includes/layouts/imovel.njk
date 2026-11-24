@@ -1,0 +1,58 @@
+---
+layout: base.njk
+---
+{%- set estados = {"disponivel": "À venda", "vendido": "Vendido", "brevemente": "Brevemente", "reservado": "Reservado"} -%}
+<main id="main" class="imovel">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Localização na página">
+      <ol><li><a href="/">Início</a></li><li><a href="/#imoveis">Imóveis</a></li><li aria-current="page">{{ title }}</li></ol>
+    </nav>
+    <header class="imovel-head">
+      <div>
+        <p class="eyebrow">{{ estados[estado] }}{% if localidade %} · {{ localidade }}{% endif %}</p>
+        <h1 class="wide">{{ title }}</h1>
+      </div>
+      <p class="imovel-price">{{ "Vendido" if estado == "vendido" else (preco | price) }}</p>
+    </header>
+
+    {%- if imagens and imagens.length %}
+    <div class="gallery">
+      {%- for img in imagens %}{% if loop.index <= 3 %}
+      <figure class="gallery-item{% if loop.first %} is-main{% endif %}">{% picture img.src, img.alt, ("(min-width: 900px) 66vw, 100vw" if loop.first else "(min-width: 900px) 33vw, 50vw"), ([480, 720, 1080, 1400] if loop.first else [320, 560]), {"eager": loop.first, "low": not loop.first} %}</figure>
+      {%- endif %}{% endfor %}
+    </div>
+    {%- if imagens.length > 3 %}
+    <details class="gallery-more">
+      <summary>Ver todas as fotografias ({{ imagens.length }})</summary>
+      <div class="gallery-grid">
+        {%- for img in imagens %}{% if loop.index > 3 %}
+        <figure class="gallery-item">{% picture img.src, img.alt, "(min-width: 900px) 33vw, 100vw", [480, 800] %}</figure>
+        {%- endif %}{% endfor %}
+      </div>
+    </details>
+    {%- endif %}
+    {%- else %}
+    <div class="gallery-empty" aria-hidden="true"><span>{{ title }}</span></div>
+    {%- endif %}
+
+    <div class="imovel-grid">
+      <div class="imovel-text">
+        <p class="imovel-lead">{{ resumo }}</p>
+        {{ content | safe }}
+      </div>
+      <aside class="imovel-specs" aria-label="Características">
+        <dl>
+          {%- if tipologia %}<dt>Tipologia</dt><dd>{{ tipologia }}</dd>{% endif %}
+          {%- if area %}<dt>Área</dt><dd>{{ area | num }} {{ unidade }}</dd>{% endif %}
+          {%- if localidade %}<dt>Localidade</dt><dd>{{ localidade }}</dd>{% endif %}
+          {%- if concelho %}<dt>Concelho</dt><dd>{{ concelho }}</dd>{% endif %}
+          <dt>Preço</dt><dd>{{ "Vendido" if estado == "vendido" else (preco | price) }}</dd>
+          {%- if tipologia != "Terreno" %}<dt>Certificado energético</dt><dd>{{ ("Classe " + classe_energetica) if classe_energetica else "Por indicar" }}</dd>{% endif %}
+        </dl>
+        <a class="btn" href="#contacto">Pedir informações <span class="arrow" aria-hidden="true">→</span></a>
+      </aside>
+    </div>
+  </div>
+  {%- set imovel = title %}{% set mensagem = "Olá, gostaria de saber mais sobre: " + title + "." %}{% set topic = "Comprar um imóvel" %}
+  {% include "partials/contacto.njk" %}
+</main>

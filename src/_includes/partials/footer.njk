@@ -1,0 +1,21 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-logo" aria-hidden="true">{% include "partials/logo.svg" %}</div>
+    <div class="legal-info">
+      <p><strong>{{ site.legal.denominacao }}</strong> · NIPC {{ site.legal.nipc }} · Sede: {{ site.legal.morada }}{% if site.legal.codigo_postal %}, {{ site.legal.codigo_postal }} {{ site.legal.localidade }}{% endif %}{% if site.legal.capital_social %} · Capital social {{ site.legal.capital_social }}{% endif %}{% if site.legal.conservatoria %} · Matriculada na Conservatória do Registo Comercial de {{ site.legal.conservatoria }}{% endif %}</p>
+      <p>{% if site.legal.ami %}Mediação imobiliária: licença AMI n.º {{ site.legal.ami }} · {% endif %}<a href="mailto:{{ site.email }}">{{ site.email }}</a> · <a href="tel:{{ site.telefone | replace(' ', '') }}">{{ site.telefone }}</a></p>
+      {%- set redes = [["Facebook", site.redes.facebook], ["Instagram", site.redes.instagram], ["LinkedIn", site.redes.linkedin], ["Pinterest", site.redes.pinterest]] %}
+      <div class="legal-links">
+        {%- for r in redes %}{% if r[1] %}<a href="{{ r[1] }}" rel="noopener me" target="_blank">{{ r[0] }}</a>{% endif %}{% endfor %}
+        <a href="/privacidade/">Política de Privacidade</a>
+        <a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" rel="noopener">Livro de Reclamações</a>
+        <a href="/privacidade/#litigios">Resolução de litígios</a>
+        <a href="/acessibilidade/">Acessibilidade</a>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>© {{ build.date.getFullYear() }} {{ site.nome }}</span>
+      <span><a href="https://casasdaareia.com" target="_blank" rel="noopener">Casas da Areia</a> · <a href="#top">Voltar ao topo ↑</a></span>
+    </div>
+  </div>
+</footer>

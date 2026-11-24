@@ -1,30 +1,47 @@
-# Sud Living — website
+# Sud Living · sudliving.pt
 
-Site estático (HTML + CSS + JS, sem build). Abrir `index.html` no browser ou carregar a pasta para o alojamento (Hostinger).
+Site estático gerado com [Eleventy](https://www.11ty.dev/), editado no [Pages CMS](https://app.pagescms.org) e publicado no [Netlify](https://www.netlify.com/).
+
+## Como editar (backoffice)
+1. Entrar em **https://app.pagescms.org** com a conta GitHub `pedromarcaldesign`.
+2. Abrir o repositório `sudliving`, branch `main`.
+3. Editar **Imóveis à venda**, **Projetos**, **Equipa**, **Parceiros**, **Textos e contactos** ou **Páginas legais**, e carregar em **Save**.
+4. O Netlify publica o site sozinho em 1 a 2 minutos.
+
+Só quem tem acesso ao repositório no GitHub consegue editar.
+
+## Fotografias
+Carregue as fotografias em JPG ou PNG, de preferência com 2000 px ou mais. Em cada publicação, o site gera versões AVIF, WebP e JPEG em vários tamanhos (`lib/images.js`), e cada browser recebe a mais leve que suporta. As fotografias já convertidas ficam guardadas em cache no Netlify e não são reconvertidas.
+
+## SEO e GEO (pesquisa com IA)
+- HTML gerado no servidor, URL canónico, Open Graph e Twitter Cards em todas as páginas
+- Uma página por imóvel em `/imoveis/<nome>/`
+- Dados estruturados schema.org: `RealEstateAgent`, `WebSite`, `ItemList`, `RealEstateListing` com `Offer`, e `BreadcrumbList`
+- `sitemap.xml`, `robots.txt` que deixa entrar os motores de pesquisa e os assistentes de IA (GPTBot, ClaudeBot, PerplexityBot, Google-Extended…), e `llms.txt` com um resumo do negócio e dos imóveis
+- Lighthouse: 100 em Desempenho, Acessibilidade, Boas práticas e SEO, no telemóvel e no computador, em todas as páginas indexáveis
 
 ## Estrutura
-- `index.html` — página principal: Hero (carrossel) · Bem-vindos · Our Projects (antes/depois) · For Sale · Casas da Areia · Our Team · Partners · Contact · pop-up "Quer investir com a Sud Living?"
-- `assets/css/style.css` — estilos (cores da marca: preto `#19171a`, beje `#c2b396`)
-- `assets/js/main.js` — menu, carrossel, comparador antes/depois, filtros, formulário (abre email para geral@sudliving.com), pop-up
-- `privacidade.html` — Política de Privacidade (RGPD, cookies, Livro de Reclamações, RAL)
-- `acessibilidade.html` — Declaração de Acessibilidade (WCAG 2.1 AA)
-- `assets/logo/` — logótipo SUD LIVING sem frase (preto, branco, beje e `sud-living.svg` em `currentColor`)
-- `assets/fonts/` — Archivo alojada no próprio site (sem pedidos ao Google)
-- `assets/img/` — fotografias da Casa de Santa Rita (versões 2000px e `-sm` 900px)
+- `src/imoveis/*.md`: um ficheiro por imóvel
+- `src/projetos/*.md`: projetos antes/depois
+- `src/_data/site.json`, `equipa.json`, `parceiros.json`: textos, contactos, dados legais, equipa e parceiros
+- `src/paginas/*.md`: Política de Privacidade e Acessibilidade
+- `src/images/`: fotografias originais (carregadas pelo Pages CMS)
+- `src/_includes/`: modelos e CSS
+- `.pages.yml`: configuração do backoffice
+- `netlify.toml`: build, cabeçalhos de segurança e cache
 
-## Fonte da informação
-Briefing por email das Casas da Areia (mar/2023, jan/2026 e ago/2026 — a mais recente prevalece), logótipo e fotografias do Google Drive. Referência visual enviada: hero com fotografia de página inteira e logótipo grande em baixo.
+## Desenvolvimento local
+```bash
+npm install
+npm start
+```
 
-## Em falta (marcado no site)
-- Fotografias "antes" de todos os projetos; fotografias "depois" da Casa Bartolomeu e Casa Perestrelo
-- Fotografias dos imóveis à venda (exceto Santa Rita)
-- Fotografias P&B da equipa
-- Logótipos e links dos parceiros; links das redes sociais
-- Localidade/tipologia da Casa Bartolomeu; dados do Pátio Algarvio
-- Links das redes sociais (o bloco "Siga-nos" foi retirado até haver links)
+## Variáveis no Netlify
+- `SITE_URL=https://sudliving.pt`: endereço usado nos URLs canónicos, no sitemap e nos dados estruturados
 
-## Dados legais a preencher antes de publicar (marcados com [ ])
-- Rodapé: denominação social, NIPC, sede, capital social, conservatória
-- Licença AMI (só se a Sud Living fizer mediação imobiliária para terceiros)
-- Classe energética de cada imóvel à venda (obrigatória nos anúncios)
-- Política de Privacidade: prazo de conservação, alojamento, data, entidade RAL
+## Em falta
+- Dados legais (rodapé): denominação social, NIPC, sede, capital social, conservatória e licença AMI (se aplicável)
+- Classe energética de cada imóvel à venda
+- Fotografias "antes" dos projetos, da Casa Bartolomeu, da Casa Perestrelo e dos imóveis sem fotos
+- Fotografias da equipa, logótipos e links dos parceiros, links das redes sociais
+- Revisão jurídica da Política de Privacidade

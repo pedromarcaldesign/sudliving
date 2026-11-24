@@ -1,0 +1,25 @@
+{%- set home = page.url == "/" -%}
+<header class="site-header{% if not home %} is-solid is-static{% endif %}" id="header">
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel" aria-label="Menu"><span class="bars" aria-hidden="true"></span><span aria-hidden="true">Menu</span></button>
+  <nav class="nav-inline" aria-label="Principal">
+    <a href="/#projetos" lang="en">Our Projects</a>
+    <a href="/#imoveis" lang="en">For Sale</a>
+    <a href="/#equipa" lang="en">Our Team</a>
+    <a href="/#parceiros" lang="en">Partners</a>
+  </nav>
+  <a class="brand" href="/" aria-label="{{ site.nome }}, página inicial">{% include "partials/logo.svg" %}</a>
+  <a class="header-cta" href="{{ '#contacto' if home or showContact else '/#contacto' }}" lang="en">Contact</a>
+</header>
+<div class="menu-panel" id="menuPanel">
+  <nav aria-label="Menu">
+    <a href="/#projetos" lang="en">Our Projects</a>
+    <a href="/#imoveis" lang="en">For Sale</a>
+    <a href="/#equipa" lang="en">Our Team</a>
+    <a href="/#parceiros" lang="en">Partners</a>
+    <a href="/#contacto" lang="en">Contact</a>
+  </nav>
+  <div class="menu-foot">
+    <a href="tel:{{ site.telefone | replace(' ', '') }}">{{ site.telefone }}</a>
+    <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+  </div>
+</div>

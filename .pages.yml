@@ -1,0 +1,177 @@
+# Backoffice do site Sud Living — Pages CMS (https://app.pagescms.org)
+# Cada alteração guardada aqui fica gravada no GitHub e o Netlify publica o site sozinho.
+
+media:
+  input: src/images
+  output: /images
+  extensions: [jpg, jpeg, png, webp, avif]
+
+content:
+  - name: imoveis
+    label: Imóveis à venda
+    type: collection
+    path: src/imoveis
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, estado, localidade, preco]
+      sort: [ordem, title]
+    fields:
+      - { name: title, label: Nome do imóvel, type: string, required: true }
+      - name: estado
+        label: Estado
+        type: select
+        required: true
+        default: disponivel
+        options:
+          values:
+            - { value: disponivel, label: À venda }
+            - { value: reservado, label: Reservado }
+            - { value: brevemente, label: Brevemente }
+            - { value: vendido, label: Vendido }
+      - { name: localidade, label: Localidade, type: string, description: "Ex.: Santa Rita, Vila Nova de Cacela" }
+      - { name: concelho, label: Concelho, type: string, description: "Ex.: Vila Real de Santo António" }
+      - { name: tipologia, label: Tipologia, type: string, description: "T0, T1… V5, ou Terreno" }
+      - { name: area, label: Área, type: number }
+      - name: unidade
+        label: Unidade da área
+        type: select
+        default: m²
+        options: { values: [m², ha] }
+      - { name: preco, label: Preço (€), type: number, description: "Só números, sem pontos nem €. Vazio = Sob consulta." }
+      - name: classe_energetica
+        label: Classe energética
+        type: select
+        description: "Obrigatória nos anúncios de venda (exceto terrenos)."
+        options: { values: ["", "A+", "A", "B", "B-", "C", "D", "E", "F", "Isento"] }
+      - { name: resumo, label: Resumo (aparece no Google e nos cartões), type: text, required: true, description: "Uma ou duas frases, até 155 caracteres." }
+      - name: imagens
+        label: Fotografias
+        type: object
+        list: true
+        description: "A primeira é a fotografia principal. Carregue fotos em JPG ou PNG: o site converte-as sozinho para formatos leves (AVIF e WebP)."
+        fields:
+          - { name: src, label: Fotografia, type: image }
+          - { name: alt, label: Descrição da fotografia (acessibilidade e Google), type: string, required: true }
+      - { name: ordem, label: Ordem na lista, type: number, default: 10 }
+      - { name: body, label: Descrição completa, type: rich-text }
+
+  - name: projetos
+    label: Projetos (antes / depois)
+    type: collection
+    path: src/projetos
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, localidade]
+      sort: [ordem, title]
+    fields:
+      - { name: title, label: Nome do projeto, type: string, required: true }
+      - { name: localidade, label: Localidade, type: string }
+      - { name: tipologia, label: Tipologia, type: string }
+      - { name: resumo, label: Texto curto, type: text }
+      - { name: antes, label: Fotografia antes, type: image }
+      - { name: depois, label: Fotografia depois, type: image }
+      - { name: ordem, label: Ordem, type: number, default: 10 }
+
+  - name: equipa
+    label: Equipa
+    type: file
+    path: src/_data/equipa.json
+    format: json
+    fields:
+      - { name: titulo, label: Título da secção, type: string }
+      - { name: texto, label: Texto da secção, type: text }
+      - name: membros
+        label: Pessoas
+        type: object
+        list: true
+        fields:
+          - { name: nome, label: Nome, type: string, required: true }
+          - { name: funcao, label: Função, type: string }
+          - { name: foto, label: Fotografia (fica a preto e branco no site), type: image }
+
+  - name: parceiros
+    label: Parceiros
+    type: file
+    path: src/_data/parceiros.json
+    format: json
+    fields:
+      - { name: titulo, label: Título da secção, type: string }
+      - { name: texto, label: Texto da secção, type: text }
+      - name: lista
+        label: Parceiros
+        type: object
+        list: true
+        fields:
+          - { name: nome, label: Nome, type: string, required: true }
+          - { name: area, label: Área (ex. Arquitetura), type: string }
+          - { name: url, label: Site do parceiro, type: string }
+          - { name: logo, label: Logótipo, type: image }
+
+  - name: site
+    label: Textos e contactos do site
+    type: file
+    path: src/_data/site.json
+    format: json
+    fields:
+      - { name: nome, label: Nome da marca, type: string }
+      - { name: url, label: Endereço do site, type: string }
+      - { name: lema, label: Lema, type: string }
+      - { name: descricao, label: Descrição (Google e redes sociais), type: text }
+      - { name: telefone, label: Telefone, type: string }
+      - { name: email, label: Email, type: string }
+      - { name: regiao, label: Região, type: string }
+      - name: hero
+        label: Fotografias do topo (carrossel)
+        type: object
+        list: true
+        fields:
+          - { name: src, label: Fotografia, type: image }
+          - { name: alt, label: Descrição da fotografia, type: string }
+      - { name: intro_titulo, label: Introdução — frase principal, type: text }
+      - { name: intro_texto, label: "Introdução — texto (**negrito** e [ligação](https://…) são aceites)", type: text }
+      - { name: faixa_titulo, label: Faixa Casas da Areia — título, type: string }
+      - { name: faixa_texto, label: Faixa Casas da Areia — texto, type: text }
+      - { name: faixa_imagem, label: Faixa Casas da Areia — fotografia, type: image }
+      - { name: faixa_link, label: Faixa Casas da Areia — ligação, type: string }
+      - { name: popup_ativo, label: Mostrar janela "Quer investir?", type: boolean }
+      - { name: popup_titulo, label: Janela — título, type: string }
+      - { name: popup_texto, label: Janela — texto, type: text }
+      - { name: popup_imagem, label: Janela — fotografia, type: image }
+      - name: redes
+        label: Redes sociais (deixe vazio para não mostrar)
+        type: object
+        fields:
+          - { name: facebook, label: Facebook, type: string }
+          - { name: instagram, label: Instagram, type: string }
+          - { name: linkedin, label: LinkedIn, type: string }
+          - { name: pinterest, label: Pinterest, type: string }
+      - name: legal
+        label: Dados legais da empresa (rodapé)
+        type: object
+        fields:
+          - { name: denominacao, label: Denominação social, type: string }
+          - { name: nipc, label: NIPC, type: string }
+          - { name: morada, label: Morada da sede, type: string }
+          - { name: codigo_postal, label: Código postal, type: string }
+          - { name: localidade, label: Localidade, type: string }
+          - { name: capital_social, label: Capital social, type: string }
+          - { name: conservatoria, label: Conservatória do Registo Comercial, type: string }
+          - { name: ami, label: Licença AMI (só se fizer mediação), type: string }
+
+  - name: paginas
+    label: Páginas legais
+    type: collection
+    path: src/paginas
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+    fields:
+      - { name: title, label: Título, type: string, required: true }
+      - { name: description, label: Descrição para o Google, type: text }
+      - { name: atualizado, label: Última atualização, type: string }
+      - { name: body, label: Texto, type: rich-text }

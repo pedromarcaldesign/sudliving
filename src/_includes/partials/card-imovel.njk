@@ -1,0 +1,17 @@
+{%- set d = i.data -%}
+<a class="listing reveal{% if d.estado == 'vendido' %} is-sold{% endif %}" data-status="{{ 'vendido' if d.estado == 'vendido' else 'disponivel' }}" href="{{ i.url }}">
+  <div class="listing-media">
+    {%- if d.imagens and d.imagens.length %}{% picture d.imagens[0].src, d.imagens[0].alt, "(min-width: 1100px) 30vw, (min-width: 640px) 45vw, 100vw", [400, 640, 900] %}{% else %}<div class="ph" aria-hidden="true"><span>{{ d.title }}</span></div>{% endif %}
+    <span class="tag{% if d.estado == 'vendido' %} sold{% endif %}">{{ {"disponivel": "À venda", "vendido": "Vendido", "brevemente": "Brevemente", "reservado": "Reservado"}[d.estado] }}</span>
+  </div>
+  <div class="listing-body">
+    <h3 class="wide">{{ d.title }}</h3>
+    <span class="loc">{{ d.localidade }}</span>
+    <div class="listing-specs">
+      {%- if d.tipologia %}<span>{{ d.tipologia }}</span>{% endif %}
+      {%- if d.area %}<span>{{ d.area | num }} {{ d.unidade }}</span>{% endif %}
+      <span class="price">{{ "Vendido" if d.estado == "vendido" else (d.preco | price) }}</span>
+    </div>
+    {%- if d.estado != "vendido" and d.tipologia != "Terreno" %}<span class="listing-specs energy">Certificado energético: {{ ("classe " + d.classe_energetica) if d.classe_energetica else "classe por indicar" }}</span>{% endif %}
+  </div>
+</a>

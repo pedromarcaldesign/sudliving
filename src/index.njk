@@ -1,0 +1,151 @@
+---
+layout: base.njk
+description: "A Sud Living compra, recupera e vende casas com história no Algarve: moradias, montes e terrenos em Vila Nova de Cacela, Castro Marim, Altura e Praia Verde."
+---
+<section class="hero" id="top" aria-label="{{ site.nome }}">
+  <div class="hero-slides" id="heroSlides">
+    {%- for h in site.hero %}
+    <div class="slide{% if loop.first %} is-active{% endif %}"{% if not loop.first %} hidden{% endif %}>{% picture h.src, h.alt, "100vw", [480, 720, 1080, 1440, 1920], {"eager": loop.first} %}</div>
+    {%- endfor %}
+  </div>
+  {%- if site.hero.length > 1 %}
+  <button class="hero-pause" id="heroPause" type="button" aria-pressed="false" aria-label="Pausar fotografias">❚❚</button>
+  <div class="hero-meta hero-dots" id="heroDots" role="group" aria-label="Escolher fotografia"></div>
+  {%- endif %}
+  <h1 class="hero-logo" id="heroLogo"><span class="sr-only">{{ site.nome }}: casas com história no Algarve</span>{% include "partials/logo.svg" %}</h1>
+</section>
+
+<main id="main">
+  <section class="intro wrap" aria-labelledby="introTitle">
+    <div class="intro-grid">
+      <div class="reveal">
+        <p class="eyebrow">Bem-vindos à {{ site.nome }}</p>
+        <h2 id="introTitle">{{ site.intro_titulo }}</h2>
+      </div>
+      <div class="intro-copy reveal">
+        {{ site.intro_texto | md | safe }}
+        <div class="cta-row">
+          <a class="btn" href="#projetos">Conheça os nossos projetos <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="#contacto" data-topic="Investir com a Sud Living">Invista connosco</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projetos" aria-labelledby="projectsTitle">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="wide" id="projectsTitle" lang="en">Our Projects<span class="count" aria-hidden="true">{{ collections.projetos.length | pad2 }}</span></h2>
+        <p>Antes e depois. Arraste o comparador sobre cada imagem para ver como cada casa foi recuperada, respeitando a sua história.</p>
+      </div>
+      <div class="projects">
+        {%- for p in collections.projetos %}
+        <article class="project reveal">
+          {%- if p.data.depois and p.data.antes %}
+          <div class="ba" style="--pos:50%">
+            {% picture p.data.depois, p.data.title + ", depois da recuperação", "(min-width: 900px) 60vw, 100vw", [600, 900, 1200] %}
+            <div class="ba-before">{% picture p.data.antes, p.data.title + ", antes da recuperação", "(min-width: 900px) 60vw, 100vw", [600, 900, 1200] %}</div>
+            <span class="ba-label before" aria-hidden="true">Antes</span><span class="ba-label after" aria-hidden="true">Depois</span>
+            <div class="ba-handle" aria-hidden="true"><span class="ba-knob">↔</span></div>
+            <input type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois: {{ p.data.title }}">
+          </div>
+          {%- elif p.data.depois %}
+          <div class="ba ba-single">
+            {% picture p.data.depois, p.data.title + ", depois da recuperação", "(min-width: 900px) 60vw, 100vw", [600, 900, 1200] %}
+            <span class="ba-label after" aria-hidden="true">Depois</span>
+          </div>
+          {%- else %}
+          <div class="ba ba-empty"><div class="ba-placeholder">Fotografias em breve</div></div>
+          {%- endif %}
+          <div class="project-info">
+            <h3 class="wide">{{ p.data.title }}</h3>
+            {%- if p.data.resumo %}<p>{{ p.data.resumo }}</p>{% endif %}
+            {%- if p.data.localidade or p.data.tipologia %}
+            <dl>
+              {%- if p.data.localidade %}<dt>Localidade</dt><dd>{{ p.data.localidade }}</dd>{% endif %}
+              {%- if p.data.tipologia %}<dt>Tipologia</dt><dd>{{ p.data.tipologia }}</dd>{% endif %}
+            </dl>
+            {%- endif %}
+          </div>
+        </article>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="imoveis" aria-labelledby="saleTitle">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="wide" id="saleTitle" lang="en">For Sale</h2>
+        <p>Imóveis selecionados no Algarve e não só. Para mais informações ou visitas, fale connosco.</p>
+      </div>
+      <div class="filters reveal" role="group" aria-label="Filtrar imóveis">
+        <button type="button" data-filter="all" aria-pressed="true">Todos</button>
+        <button type="button" data-filter="disponivel" aria-pressed="false">Disponíveis</button>
+        <button type="button" data-filter="vendido" aria-pressed="false">Vendidos</button>
+      </div>
+      <div class="listings" id="listings">
+        {%- for i in collections.imoveis %}
+        {% include "partials/card-imovel.njk" %}
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="bandTitle">
+    {% picture site.faixa_imagem, "", "100vw", [640, 1280, 1920] %}
+    <div class="wrap">
+      <p class="eyebrow">Alojamento</p>
+      <h2 class="wide reveal" id="bandTitle">{{ site.faixa_titulo }}</h2>
+      <p class="reveal">{{ site.faixa_texto }}</p>
+      <a class="btn reveal" href="{{ site.faixa_link }}" target="_blank" rel="noopener">Visitar Casas da Areia <span class="arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="section" id="equipa" aria-labelledby="teamTitle">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="wide" id="teamTitle" lang="en">{{ equipa.titulo }}</h2>
+        <p>{{ equipa.texto }}</p>
+      </div>
+      <div class="team" role="region" aria-label="Equipa" tabindex="0">
+        {%- for m in equipa.membros %}
+        <div class="member reveal">
+          <div class="member-photo">{% if m.foto %}{% picture m.foto, m.nome, "(min-width: 900px) 20vw, 45vw", [300, 500] %}{% else %}<span class="initials" aria-hidden="true">{% for w in m.nome.split(" ") %}{% if loop.index <= 2 %}{{ w[0] }}{% endif %}{% endfor %}</span>{% endif %}</div>
+          <h3>{{ m.nome }}</h3><p>{{ m.funcao }}</p>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="parceiros" aria-labelledby="partnersTitle">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="wide" id="partnersTitle" lang="en">{{ parceiros.titulo }}</h2>
+        <p>{{ parceiros.texto }}</p>
+      </div>
+      <div class="partners reveal">
+        {%- for p in parceiros.lista %}
+        {%- set inner %}{% if p.logo %}{% picture p.logo, p.nome, "200px", [200, 400] %}{% else %}<span>{{ p.nome }}{% if p.area %}<small>{{ p.area }}</small>{% endif %}</span>{% endif %}{% endset %}
+        {%- if p.url %}<a class="partner" href="{{ p.url }}" target="_blank" rel="noopener">{{ inner | safe }}</a>{% else %}<div class="partner">{{ inner | safe }}</div>{% endif %}
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  {% include "partials/contacto.njk" %}
+</main>
+
+{%- if site.popup_ativo %}
+<aside class="invest" id="invest" aria-labelledby="investTitle" hidden>
+  <button class="invest-close" id="investClose" type="button" aria-label="Fechar">×</button>
+  {%- if site.popup_imagem %}<div class="invest-media">{% picture site.popup_imagem, "", "380px", [380, 760] %}</div>{% endif %}
+  <div class="invest-body">
+    <p class="eyebrow">{{ site.nome }}</p>
+    <h2 class="wide" id="investTitle">{{ site.popup_titulo }}</h2>
+    <p>{{ site.popup_texto }}</p>
+    <a class="btn" href="#contacto" id="investCta" data-topic="Investir com a Sud Living">Falar connosco <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</aside>
+{%- endif %}

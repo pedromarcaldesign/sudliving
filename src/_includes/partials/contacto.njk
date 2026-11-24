@@ -1,0 +1,39 @@
+<section class="section contact" id="contacto" aria-labelledby="contactTitle">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="wide" id="contactTitle"><span lang="en">Contact</span> {{ site.nome }}</h2>
+      <p>Quer comprar ou vender um imóvel, investir connosco ou conhecer oportunidades de franchising? Gostávamos muito de falar consigo.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-details reveal">
+        <div><span class="eyebrow">Telefone</span><a href="tel:{{ site.telefone | replace(' ', '') }}">{{ site.telefone }}</a></div>
+        <div><span class="eyebrow">Email</span><a href="mailto:{{ site.email }}">{{ site.email }}</a></div>
+      </div>
+      <form class="contact-form reveal" id="contactForm" name="contacto" method="POST" action="/obrigado/" data-netlify="true" netlify-honeypot="empresa">
+        <input type="hidden" name="form-name" value="contacto">
+        <p class="sr-only" aria-hidden="true"><label>Não preencher: <input name="empresa" tabindex="-1" autocomplete="off"></label></p>
+        <div class="row-2">
+          <div class="field"><label for="f-name">Nome <span class="req" aria-hidden="true">*</span></label><input id="f-name" name="nome" autocomplete="name" required></div>
+          <div class="field"><label for="f-phone">Telefone</label><input id="f-phone" name="telefone" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label for="f-email">Email <span class="req" aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field">
+            <label for="f-topic">Assunto</label>
+            <select id="f-topic" name="assunto">
+              {%- for o in ["Comprar um imóvel", "Vender um imóvel", "Investir com a Sud Living", "Franchising", "Outro"] %}
+              <option{% if o == (topic or "Comprar um imóvel") %} selected{% endif %}>{{ o }}</option>
+              {%- endfor %}
+            </select>
+          </div>
+        </div>
+        {%- if imovel %}<input type="hidden" name="imovel" value="{{ imovel }}">{% endif %}
+        <div class="field"><label for="f-msg">Mensagem <span class="req" aria-hidden="true">*</span></label><textarea id="f-msg" name="mensagem" required>{{ mensagem }}</textarea></div>
+        <label class="consent" for="f-consent"><input type="checkbox" id="f-consent" name="consentimento" value="sim" required><span>Li a <a href="/privacidade/">Política de Privacidade</a> e aceito que a {{ site.nome }} use estes dados para responder ao meu pedido. <span class="req" aria-hidden="true">*</span></span></label>
+        <button class="btn" type="submit">Enviar mensagem <span class="arrow" aria-hidden="true">→</span></button>
+        <p class="form-note">Campos com * são obrigatórios.</p>
+        <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>

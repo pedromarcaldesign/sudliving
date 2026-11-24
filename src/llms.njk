@@ -1,0 +1,29 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+# {{ site.nome }}
+
+> {{ site.descricao }} Região: {{ site.regiao }}. Contacto: {{ site.email }} · {{ site.telefone }}.
+
+A {{ site.nome }} dedica-se à compra, recuperação e venda de imóveis no Algarve, sobretudo casas tradicionais algarvias com história, que recupera preservando a arquitetura local (cal, tijoleira, madeira, caniço). Através das Casas da Areia (https://casasdaareia.com) gere também alojamento local no Algarve.
+
+## Imóveis
+{% for i in collections.imoveis %}
+- [{{ i.data.title }}]({{ build.url }}{{ i.url }}): {{ {"disponivel": "à venda", "vendido": "vendido", "brevemente": "brevemente", "reservado": "reservado"}[i.data.estado] }}{% if i.data.tipologia %}, {{ i.data.tipologia }}{% endif %}{% if i.data.area %}, {{ i.data.area | num }} {{ i.data.unidade }}{% endif %}{% if i.data.localidade %}, {{ i.data.localidade }}{% endif %}{% if i.data.estado != "vendido" and i.data.preco %}, {{ i.data.preco | price }}{% endif %}. {{ i.data.resumo }}
+{%- endfor %}
+
+## Projetos de recuperação
+{% for p in collections.projetos %}
+- {{ p.data.title }}{% if p.data.localidade %} ({{ p.data.localidade }}{% if p.data.tipologia %}, {{ p.data.tipologia }}{% endif %}){% endif %}{% if p.data.resumo %}: {{ p.data.resumo }}{% endif %}
+{%- endfor %}
+
+## Equipa
+{% for m in equipa.membros %}
+- {{ m.nome }}: {{ m.funcao }}
+{%- endfor %}
+
+## Páginas
+- [Início]({{ build.url }}/)
+- [Política de Privacidade]({{ build.url }}/privacidade/)
+- [Acessibilidade]({{ build.url }}/acessibilidade/)

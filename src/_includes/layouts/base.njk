@@ -1,0 +1,49 @@
+{%- set base = build.url -%}
+{%- set canonical = base + page.url -%}
+{%- set pageTitle = (title + " · " + site.nome) if title else (site.nome + " · Casas com história no Algarve") -%}
+{%- set pageDesc = (description or site.descricao) | stripTags | truncate(158) -%}
+{%- set ogSrc = ogImage or site.hero[0].src -%}
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ pageTitle }}</title>
+<meta name="description" content="{{ pageDesc }}">
+<link rel="canonical" href="{{ canonical }}">
+{%- if noindex %}<meta name="robots" content="noindex, follow">{% else %}<meta name="robots" content="index, follow, max-image-preview:large">{% endif %}
+<meta name="theme-color" content="#f4f1ea">
+<meta name="geo.region" content="PT-08">
+<meta name="geo.placename" content="Algarve">
+<meta property="og:type" content="{{ ogType or 'website' }}">
+<meta property="og:locale" content="pt_PT">
+<meta property="og:site_name" content="{{ site.nome }}">
+<meta property="og:title" content="{{ title or site.nome }}">
+<meta property="og:description" content="{{ pageDesc }}">
+<meta property="og:url" content="{{ canonical }}">
+{%- set ogUrl %}{% imageUrl ogSrc, 1200 %}{% endset %}
+{%- if ogUrl %}
+<meta property="og:image" content="{{ base }}{{ ogUrl }}">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ base }}{{ ogUrl }}">
+{%- endif %}
+<meta name="twitter:title" content="{{ title or site.nome }}">
+<meta name="twitter:description" content="{{ pageDesc }}">
+{%- if preloadHero %}{{ preloadHero | safe }}{% endif %}
+<link rel="preload" href="/assets/fonts/archivo-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-expanded-semibold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="Resumo para assistentes de IA">
+{%- set css %}{% include "style.css" %}{% endset %}
+<style>{{ css | minifyCss | safe }}</style>
+{%- include "partials/jsonld.njk" %}
+</head>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+<a class="skip-link" href="#main">Saltar para o conteúdo</a>
+{% include "partials/header.njk" %}
+{{ content | safe }}
+{% include "partials/footer.njk" %}
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>
