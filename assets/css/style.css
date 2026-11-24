@@ -209,8 +209,8 @@ button { font: inherit; color: inherit; }
 .band .btn:hover { background: transparent; color: var(--white); }
 
 /* ---------- Team ---------- */
-.team { display: grid; gap: clamp(28px, 3vw, 40px) clamp(16px, 2vw, 28px); grid-template-columns: repeat(2, 1fr); }
-@media (min-width: 900px) { .team { grid-template-columns: repeat(3, 1fr); } }
+.team { display: grid; gap: clamp(16px, 2vw, 28px); grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+.team .member { scroll-snap-align: start; min-width: 0; }
 .member { display: grid; gap: 12px; }
 .member-photo { aspect-ratio: 3 / 4; background: #d8d4cd; position: relative; overflow: hidden; display: grid; place-items: center; filter: grayscale(1); }
 .member-photo img { width: 100%; height: 100%; object-fit: cover; }
