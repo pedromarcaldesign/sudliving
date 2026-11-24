@@ -2,13 +2,35 @@
   "titulo": "Partners",
   "texto": "Quem trabalha connosco para que cada projeto saia bem feito.",
   "lista": [
-    { "nome": "Exactigold", "area": "", "url": "", "logo": "" },
-    { "nome": "Engel & Völkers", "area": "Imobiliária", "url": "https://www.engelvoelkers.com/pt/pt", "logo": "" },
-    { "nome": "Jorge Arquitectura", "area": "Arquitetura", "url": "", "logo": "" },
-    { "nome": "Mafalda Candeias", "area": "Interiores", "url": "", "logo": "" },
-    { "nome": "Primecut", "area": "", "url": "", "logo": "" },
-    { "nome": "Zoom Projects", "area": "", "url": "", "logo": "" },
-    { "nome": "Monte da Lagoa", "area": "", "url": "", "logo": "" },
-    { "nome": "Caldeira", "area": "Manutenção de piscinas", "url": "", "logo": "" }
+    {
+      "nome": "Exactigold",
+      "url": "https://exactigold.com/"
+    },
+    {
+      "nome": "Engel & Völkers",
+      "area": "Imobiliária",
+      "url": "https://www.engelvoelkers.com/pt/pt"
+    },
+    {
+      "nome": "Jorge Arquitectura",
+      "area": "Arquitetura"
+    },
+    {
+      "nome": "Mafalda Candeias",
+      "area": "Interiores"
+    },
+    {
+      "nome": "Primecut"
+    },
+    {
+      "nome": "Zoom Projects"
+    },
+    {
+      "nome": "Monte da Lagoa"
+    },
+    {
+      "nome": "Caldeira",
+      "area": "Manutenção de piscinas"
+    }
   ]
 }
