@@ -30,9 +30,15 @@
     panel.setAttribute('aria-hidden', String(!open));
     document.body.style.overflow = open ? 'hidden' : '';
   };
-  btn.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  btn.addEventListener('click', () => {
+    const open = !document.body.classList.contains('menu-open');
+    setMenu(open);
+    if (open) setTimeout(() => $('a', panel).focus(), 50);
+  });
   $$('a', panel).forEach(a => a.addEventListener('click', () => setMenu(false)));
-  addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { setMenu(false); btn.focus(); }
+  });
 
   /* Carrossel da hero */
   const slides = $$('#heroSlides img');
@@ -53,8 +59,18 @@
     img.classList.add('is-active');
     $$('button', dots).forEach((d, j) => d.setAttribute('aria-current', String(j === current)));
   };
-  const restart = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => go(current + 1), 5500); };
-  go(0); restart();
+  const pauseBtn = $('#heroPause');
+  let paused = reduce;
+  const restart = () => { clearInterval(timer); if (!paused) timer = setInterval(() => go(current + 1), 5500); };
+  const setPaused = p => {
+    paused = p;
+    pauseBtn.setAttribute('aria-pressed', String(p));
+    pauseBtn.setAttribute('aria-label', p ? 'Retomar fotografias' : 'Pausar fotografias');
+    pauseBtn.textContent = p ? '▶' : '❚❚';
+    restart();
+  };
+  pauseBtn.addEventListener('click', () => setPaused(!paused));
+  go(0); setPaused(paused);
 
   /* Antes / depois */
   $$('.ba:not(.ba-empty)').forEach(ba => {
@@ -86,7 +102,7 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (!form.checkValidity()) {
-      note.textContent = 'Por favor preencha o nome, um email válido e a mensagem.';
+      note.textContent = 'Falta preencher: nome, um email válido, a mensagem e a aceitação da Política de Privacidade.';
       form.reportValidity();
       return;
     }
@@ -111,9 +127,6 @@
   }
   $('#investClose').addEventListener('click', closeInvest);
   $('#investCta').addEventListener('click', () => { topic.value = 'Investir com a Sud Living'; closeInvest(); });
-
-  /* Links ainda por definir */
-  $$('[data-todo-link]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
 
   /* Revelar ao fazer scroll */
   const io = 'IntersectionObserver' in window && !reduce
