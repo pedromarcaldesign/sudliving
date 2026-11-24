@@ -1,14 +1,14 @@
 ---
 title: Casa de Santa Rita
-estado: disponivel
+estado: vendido
 localidade: Santa Rita, Vila Nova de Cacela
 concelho: Vila Real de Santo António
 tipologia: T3
 area: 130
 unidade: m²
 preco: 450000
-classe_energetica: ""
-resumo: Casa algarvia de pátio, recuperada com cal, tijoleira, madeira e caniço, com tanque e duche exterior.
+resumo: Casa algarvia de pátio, recuperada com cal, tijoleira, madeira e caniço,
+  com tanque e duche exterior.
 imagens:
   - src: /images/santa-rita-patio.jpg
     alt: Pátio da Casa de Santa Rita, com tanque, oliveira e mesa de refeições
