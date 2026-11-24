@@ -7,7 +7,7 @@ atualizado: "[data]"
 
 ## 1. Quem é responsável pelos seus dados
 
-{{ site.legal.denominacao }}, NIPC {{ site.legal.nipc }}, com sede em {{ site.legal.morada }}, que usa a marca Sud Living ("nós"). Contacto: [{{ site.email }}](mailto:{{ site.email }}) · {{ site.telefone }}.
+{{ site.legal.denominacao }}, NIPC {{ site.legal.nipc }}, com sede em {{ site.legal.morada }}, {{ site.legal.codigo_postal }} {{ site.legal.localidade }}, Portugal, que usa a marca Sud Living ("nós"). Contacto: [{{ site.email }}](mailto:{{ site.email }}) · {{ site.telefone }}.
 
 ## 2. Que dados recolhemos
 

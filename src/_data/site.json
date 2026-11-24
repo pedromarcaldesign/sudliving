@@ -39,8 +39,10 @@
   "popup_texto": "Recuperamos casas com história no Algarve. Fale connosco e conheça os próximos projetos.",
   "popup_imagem": "/images/santa-rita-corredor.jpg",
   "legal": {
-    "denominacao": "[Denominação social]",
-    "nipc": "[000 000 000]",
-    "morada": "[Morada completa]"
+    "denominacao": "Particulas Notaveis, Lda.",
+    "nipc": "514371889",
+    "morada": "Urbanização Rias Parque, lote 28",
+    "codigo_postal": "8900-477",
+    "localidade": "Vila Real de Santo António"
   }
 }
