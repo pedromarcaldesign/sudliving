@@ -17,17 +17,17 @@ layout: base.njk
 
     {%- if imagens and imagens.length %}
     <div class="gallery">
-      {%- for img in imagens %}{% if loop.index <= 3 %}
+      {%- asyncEach img in imagens %}{% if loop.index <= 3 %}
       <figure class="gallery-item{% if loop.first %} is-main{% endif %}">{% picture img.src, img.alt, ("(min-width: 900px) 66vw, 100vw" if loop.first else "(min-width: 900px) 33vw, 50vw"), ([480, 720, 1080, 1400] if loop.first else [320, 560]), {"eager": loop.first, "low": not loop.first} %}</figure>
-      {%- endif %}{% endfor %}
+      {%- endif %}{% endeach %}
     </div>
     {%- if imagens.length > 3 %}
     <details class="gallery-more">
       <summary>Ver todas as fotografias ({{ imagens.length }})</summary>
       <div class="gallery-grid">
-        {%- for img in imagens %}{% if loop.index > 3 %}
+        {%- asyncEach img in imagens %}{% if loop.index > 3 %}
         <figure class="gallery-item">{% picture img.src, img.alt, "(min-width: 900px) 33vw, 100vw", [480, 800] %}</figure>
-        {%- endif %}{% endfor %}
+        {%- endif %}{% endeach %}
       </div>
     </details>
     {%- endif %}
